@@ -3,9 +3,8 @@ let deltaThresh = 4;
 let mouseDown = false;
 let first_point = true;
 
-// let colors = ["#000000", "#FF0000", "#008000", "#800080",	"#A9A9A9", "#FFFFFF"]	;
-//Black, Red, Green, Purple, Grey, White
-// let radius
+// let colors = ["#000000", "#FF0000", "#008000", "#800080", "#FFFFFF"]	;
+//Black, Red, Green, Purple, White
 
 let sendQueue = [];
 
@@ -32,7 +31,7 @@ function draw() {
       url: "/getData",
       data: JSON.stringify({"lastIdx": lastIdx, "roomNumber": roomNumber}),
       success: function(data) {
-        console.log("data");
+        console.log(data);
         for(let k = 0; k < data.length; k++){
           for(let j = 0; j < data[k].length-1; j++){
             line(data[k][j][0],data[k][j][1],data[k][j+1][0],data[k][j+1][1]);
@@ -75,12 +74,19 @@ function mouseDragged() {
   let sWeight = 2.5;
   //if (key == 'b' || key == 'B'))
   //  color == 0;
-  //else if (key == 'r' || key == 'R'))
+  // sweight = 2.5;
+  //else if (key == 'r' || key == 'R')
   // color == 1;
-  //else if (key == 'g' || key == 'G'))
+  // sweight = 2.5;
+  //else if (key == 'g' || key == 'G')
   // color == 2;
-  //else if (key == 'p' || key == 'P'))
-  // color == 1;
+  // sweight = 2.5;
+  //else if (key == 'p' || key == 'P')
+  // color == 3;
+  // sweight = 2.5;
+  //else if (key == 'e' || key == 'E')
+  // color == 4;
+  // sweight = 6;
   if (mouseDown){
     stroke(0);
     if (!first_point && distSquaredVec(lastClicked[0]-mouseX, lastClicked[1]-mouseY) > deltaThresh) {

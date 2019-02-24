@@ -19,14 +19,11 @@ def test():
 def getData():
     lastIdx = int(request.json["lastIdx"])
     roomNumber = str(request.json["roomNumber"])
-    import pdb; pdb.set_trace()
     print(json.dumps(roomDatas[roomNumber][lastIdx:]))
     return json.dumps(roomDatas[roomNumber][lastIdx:])
 
 @app.route('/putData', methods=('POST',))
 def putData():
-    # how do you know what room they are in?
-    print("sending DATA\n\n\n\n")
     roomNumber = str(request.json["roomNumber"])
     global roomDatas
     roomDatas[roomNumber].append(request.json["sendQueue"])
