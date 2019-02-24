@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+  </div>
+  <div class="row">
+    <div class="col" style="padding:10%;">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Join Room</label>
+        <input class="form-control form-control-lg" type="text" name="joinRoomCode" placeholder="room code">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <div class="col" style="padding:10%;">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Create Room</label>
+        <input class="form-control form-control-lg" type="text" name="createRoomCode" placeholder="room code">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
