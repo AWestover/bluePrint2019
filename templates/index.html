@@ -1,24 +1,80 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
+
+<style>
+#grad1 {
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, red , yellow); /* Standard syntax (must be last) */
+}
+
+#grad2 {
+  background-color: white; /* For browsers that do not support gradients */
+  background-image: linear-gradient(-90deg, #afafaf, #d6d6d6); /* Standard syntax (must be last) */
+}
+
+div.containerCenter{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) }
+</style>
+
+<div class="p-3 mb-2 bg-success text-white"  id="grad1">
+  <h1 class="title">SHAREBOARD</h1>
+</div>
+
+
+<div class=containerCenter>
+<div class="card-deck">
   <div class="row">
-  </div>
-  <div class="row">
-    <div class="col" style="padding:10%;">
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Join Room</label>
-        <input class="form-control form-control-lg" type="text" name="joinRoomCode" placeholder="room code">
+
+    <div class="card border-primary mb-3" style="max-width: 20em;">
+      <div class="card-header text-primary"><h2>Join Room</h2></div>
+      <div class="card-body text-primary">
+        <p class="card-text text-primary">Join with a code.</p>
+        <form class="test" action="/joinRoom" method="post">
+            <input class="form-control form-control-lg text-primary" type="text" name="roomNumber" placeholder="Use your room code!" id="roomNumber">
+            <div>&nbsp;</div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Join Room</button>
+        </form>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    <div class="col" style="padding:10%;">
-      <div class="form-group">
-        <label for="exampleFormControlInput1">Create Room</label>
-        <input class="form-control form-control-lg" type="text" name="createRoomCode" placeholder="room code">
+
+
+    <div class="card border-success mb-3" style="max-width: 20em;">
+      <div class="card-header text-success"><h2>Create Room</h2></div>
+      <div class="card-body text-success">
+        <p class="card-text text-success">Create a code.</p>
+        <form class="test" action="/createRoom" method="post">
+            <input class="form-control form-control-lg text-success" type="text" name="roomNumber" placeholder="Pick a room code!" id="roomNumber">
+            <div>&nbsp;</div>
+          <button type="submit" class="btn btn-success btn-lg btn-block">Create Room</button>
+        </form>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
     </div>
+
   </div>
 </div>
+</div>
+
+{% if value == 'Fail' %}
+<div class="card container">
+  <h1>FAIL</h1>
+</div>
+{% endif %}
+
+<script type="text/javascript">
+  function joinRoomF() {
+    $.ajax({
+      type: "POST",
+      contentType: "application/json; charset-utf-8",
+      url: "/joinRoom",
+      data: $("#joinRoomCode").val(),
+      dataType: "json"
+    });
+  }
+</script>
 {% endblock %}
