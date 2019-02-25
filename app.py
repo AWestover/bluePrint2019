@@ -63,5 +63,11 @@ def createRoom():
 def room():
     return render_template("room.html")
 
+# @app.route('/killBoard', methods=('POST',))
+# def killBoard():
+#     roomNumber = request.json
+#     roomDatas[]
+#     return "clearboard signal"
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

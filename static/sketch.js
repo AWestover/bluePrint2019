@@ -16,9 +16,19 @@ let sWeight = 2.5;
 
 let roomNumber = parseInt(window.location.href.substr(window.location.href.search("value=")+6));
 
+function killBoard() {
+  $.post("/killBoard", JSON.stringify(roomNumber));
+}
+
 function setup() {
   createCanvas(1200,700);
   background(255,255,255);
+	text("Color: ", width*0.8,height*0.02);
+
+  fill(colors[color]);
+  strokeWeight(1);
+  stroke(0);
+	rect(width*0.8,height*0.03,20,20);
 }
 
 function draw() {
@@ -94,6 +104,10 @@ function keyTyped() {
     color = 4;
     sWeight = 50;
   }
+  fill(colors[color]);
+  strokeWeight(1);
+  stroke(0);
+	rect(width*0.8,height*0.03,20,20);
 }
 
 function mouseDragged() {
