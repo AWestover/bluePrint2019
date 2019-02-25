@@ -3,14 +3,21 @@
 {% block content %}
 
 <style>
-#grad1 {
-  background-color: red; /* For browsers that do not support gradients */
-  background-image: linear-gradient(to right, red , yellow); /* Standard syntax (must be last) */
+body {
+  overflow: hidden;
 }
 
-#grad2 {
-  background-color: white; /* For browsers that do not support gradients */
-  background-image: linear-gradient(-90deg, #afafaf, #d6d6d6); /* Standard syntax (must be last) */
+body {
+    background: url({{url_for('static',filename='usagePic.png')}}) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#grad {
+  background-color: red;
+  background-image: linear-gradient(to right, red , yellow);
 }
 
 div.containerCenter{
@@ -19,52 +26,59 @@ div.containerCenter{
     top: 50%;
     left: 50%;
     margin-right: -50%;
-    transform: translate(-50%, -50%) }
+    transform: translate(-50%, -50%)
+  }
 </style>
 
-<div class="p-3 mb-2 bg-success text-white"  id="grad1">
+<div class="p-3 mb-2 bg-success text-white"  id="grad">
   <h1 class="title">SHAREBOARD</h1>
 </div>
 
+<div class="container" id="mainContainer">
+  <div class=containerCenter>
+    <div class="card-deck">
+      <div class="row">
 
-<div class=containerCenter>
-<div class="card-deck">
-  <div class="row">
+        <div class="card border-primary mb-3" style="max-width: 20em;">
+          <div class="card-header text-primary"><h2>Join Room</h2></div>
+          <div class="card-body text-primary">
+            <p class="card-text text-primary">Join with a code.</p>
+            <form class="test" action="/joinRoom" method="post">
+              <input class="form-control form-control-lg text-primary" type="text" name="roomNumber" placeholder="Use your room code!" id="roomNumber">
+              <div>&nbsp;</div>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Join Room</button>
+            </form>
+          </div>
+        </div>
 
-    <div class="card border-primary mb-3" style="max-width: 20em;">
-      <div class="card-header text-primary"><h2>Join Room</h2></div>
-      <div class="card-body text-primary">
-        <p class="card-text text-primary">Join with a code.</p>
-        <form class="test" action="/joinRoom" method="post">
-            <input class="form-control form-control-lg text-primary" type="text" name="roomNumber" placeholder="Use your room code!" id="roomNumber">
-            <div>&nbsp;</div>
-          <button type="submit" class="btn btn-primary btn-lg btn-block">Join Room</button>
-        </form>
+        <div class="card border-success mb-3" style="max-width: 20em;">
+          <div class="card-header text-success"><h2>Create Room</h2></div>
+          <div class="card-body text-success">
+            <p class="card-text text-success">Create a code.</p>
+            <form class="test" action="/createRoom" method="post">
+              <input class="form-control form-control-lg text-success" type="text" name="roomNumber" placeholder="Pick a room code!" id="roomNumber">
+              <div>&nbsp;</div>
+              <button type="submit" class="btn btn-success btn-lg btn-block">Create Room</button>
+            </form>
+          </div>
+        </div>
+
       </div>
     </div>
-
-
-    <div class="card border-success mb-3" style="max-width: 20em;">
-      <div class="card-header text-success"><h2>Create Room</h2></div>
-      <div class="card-body text-success">
-        <p class="card-text text-success">Create a code.</p>
-        <form class="test" action="/createRoom" method="post">
-            <input class="form-control form-control-lg text-success" type="text" name="roomNumber" placeholder="Pick a room code!" id="roomNumber">
-            <div>&nbsp;</div>
-          <button type="submit" class="btn btn-success btn-lg btn-block">Create Room</button>
-        </form>
-      </div>
-    </div>
-
   </div>
-</div>
+
 </div>
 
-{% if value == 'Fail' %}
-<div class="card container">
-  <h1>FAIL</h1>
+<div id="failer" style="visibility: hidden" class="card container">
+  <h1>FAILED ATTEMPT TO DO SOMETHING</h1>
 </div>
-{% endif %}
+
+<script type="text/javascript">
+  let val = window.location.href.substr(window.location.href.search("value=")+6);
+  if(val == "Fail"){
+    $("#failer").css('visibility', "visible");
+  }
+</script>
 
 <script type="text/javascript">
   function joinRoomF() {
