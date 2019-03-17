@@ -50,7 +50,7 @@ function saveBoard(){
 }
 
 function setup() {
-  createCanvas(1200,700);
+  createCanvas(window.innerWidth,window.innerHeight);
   background(255,255,255);
 	fill(0,0,0);
 	text("Color: ", width*0.8,height*0.02);
@@ -157,7 +157,7 @@ function mouseDragged() {
       strokeWeight(sWeight);
       stroke(colors[color]);
       line(lastClicked[0], lastClicked[1], mouseX, mouseY);
-      ellipse(mouseX, mouseY, 0.5, 0.5);
+      //ellipse(mouseX, mouseY, 0.5, 0.5);
       lastClicked[0] = mouseX;
       lastClicked[1] = mouseY;
       sendQueue.push([mouseX, mouseY, color, sWeight]);

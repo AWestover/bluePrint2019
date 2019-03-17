@@ -6,5 +6,3 @@ This is an application we made for a hackathon that allows people to write to a 
 
 # Features TO ADD
   2) infinite scrolling
-  3) delete inactive boards
-  4) host it somewhere? - just need to get around the school ipad stuff, not really any other goals. Probably not heroku, because that might be a pain.
