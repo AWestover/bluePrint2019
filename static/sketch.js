@@ -17,6 +17,12 @@ let sWeight = 2.5;
 
 let roomNumber = parseInt(window.location.href.substr(window.location.href.search("value=")+6));
 
+
+function adjustedY(fakeY) {
+	let startY = $("canvas")[0].offsetTop;
+	return fakeY - startY;
+}
+
 function postClearIdxReset() {
 	$.ajax({
 		type: "POST",
@@ -153,19 +159,19 @@ function keyTyped() {
 function mouseDragged() {
   if (mouseDown){
     stroke(0);
-    if (!first_point && distSquaredVec(lastClicked[0]-mouseX, lastClicked[1]-mouseY) > deltaThresh) {
+    if (!first_point && distSquaredVec(lastClicked[0]-winMouseX, lastClicked[1]-adjustedY(winMouseY)) > deltaThresh) {
       strokeWeight(sWeight);
       stroke(colors[color]);
-      line(lastClicked[0], lastClicked[1], mouseX, mouseY);
-      //ellipse(mouseX, mouseY, 0.5, 0.5);
-      lastClicked[0] = mouseX;
-      lastClicked[1] = mouseY;
-      sendQueue.push([mouseX, mouseY, color, sWeight]);
+      line(lastClicked[0], lastClicked[1], winMouseX, adjustedY(winMouseY));
+      //ellipse(winMouseX, adjustedY(winMouseY), 0.5, 0.5);
+      lastClicked[0] = winMouseX;
+      lastClicked[1] = adjustedY(winMouseY);
+      sendQueue.push([winMouseX, adjustedY(winMouseY), color, sWeight]);
     }
     if(first_point) {
-      lastClicked[0] = mouseX;
-      lastClicked[1] = mouseY;
-      sendQueue.push([mouseX, mouseY, color, sWeight]);
+      lastClicked[0] = winMouseX;
+      lastClicked[1] = adjustedY(winMouseY);
+      sendQueue.push([winMouseX, adjustedY(winMouseY), color, sWeight]);
       first_point = false;
     }
   }

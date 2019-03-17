@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
-
+{% block extraHead %}
 <style>
 body {
   overflow: hidden;
@@ -29,6 +28,9 @@ div.containerCenter{
     transform: translate(-50%, -50%)
   }
 </style>
+{% endblock %}
+
+{% block content %}
 
 <div class="p-3 mb-2 bg-success text-white"  id="grad">
   <h1 class="title">SHAREBOARD</h1>
