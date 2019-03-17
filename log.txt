@@ -1,0 +1,85 @@
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+	joinRoom success for room 123
+	putData from room 123
+	putData from room 123
+	putData from room 123
+	putData from room 123
+	putData from room 123
+	putData from room 123
+	putData from room 123
+	killBoard from room 123 after the point 6
+
+
+
+
+
+
+
+SUPER IMPORTANT do not take this lightly 
+
+
+
+
+
+
+
+
+
+	putData from room 123
+	putData from room 123
+	putData from room 123
+	putData from room 123
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+	joinRoom success for room 123
+	joinRoom success for room 123
+	putData from room 123
+	putData from room 123
+	putData from room 123
+	killBoard from room 123 after the point 2
+
+
+
+
+
+
+
+SUPER IMPORTANT do not take this lightly 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SUPER IMPORTANT do not take this lightly 
+
+
+
+
+
+
+
+
+
+	putData from room 123
+	putData from room 123
+	joinRoom success for room 123
+	putData from room 123
+	putData from room 123

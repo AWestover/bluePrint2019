@@ -8,6 +8,7 @@ let colors = ["#000000", "#FF0000", "#008000", "#800080", "#FFFFFF"]	;
 
 let sendQueue = [];
 let nextIdx = 0; // index of the next contour I will receive
+let lastKillIdx = -1; // kill data thing, will let me know if someone wipes the board
 let ct = 0;
 
 // these are some parameters
@@ -16,15 +17,30 @@ let sWeight = 2.5;
 
 let roomNumber = parseInt(window.location.href.substr(window.location.href.search("value=")+6));
 
+function postClearIdxReset() {
+	$.ajax({
+		type: "POST",
+		contentType: "application/json",
+		url: "/getNextIdx",
+			data: JSON.stringify({"roomNumber": roomNumber}),
+			success: function(data){
+				console.log("retrieved initial data");
+				console.log(data);
+				nextIdx = data;
+				lastKillIdx = data-1;
+		},
+		dataType: "json"
+	});
+}
+postClearIdxReset();
+
 function killBoard() {
+	console.log("running killBoard");
 	$.ajax({
     type: "POST",
     contentType: "application/json",
     url: "/killBoard",
     data: JSON.stringify({"roomNumber": roomNumber, "nextIdx":nextIdx}),
-		success: function(){
-			background(255,255,255);
-		},
     dataType: "json"
   });
 }
@@ -36,6 +52,7 @@ function saveBoard(){
 function setup() {
   createCanvas(1200,700);
   background(255,255,255);
+	fill(0,0,0);
 	text("Color: ", width*0.8,height*0.02);
 
   fill(colors[color]);
@@ -53,12 +70,16 @@ function draw() {
       type: "POST",
       contentType: "application/json",
       url: "/getData",
-      data: JSON.stringify({"nextIdx": nextIdx, "roomNumber": roomNumber}),
+      data: JSON.stringify({"nextIdx": nextIdx, "lastKillIdx": lastKillIdx, "roomNumber": roomNumber}),
       success: function(data) {
-        // console.log(data);
+				console.log(data);
 				if(!data){ // kill signal
+					console.log("I GOT KILLED \n\n\n\n\asd super important ahsdfasdfjasdlkfjaskldfjaklsdfjklsdfjaklsdf");
 					background(255,255,255);
 					console.log("got killed!!!");
+
+					postClearIdxReset();
+					// really aught to / got to modify last Kill Idx here!!!!
 				}
 				else {
 					for(let k = 0; k < data.length; k++){
