@@ -7,7 +7,7 @@ let colors = ["#000000", "#FF0000", "#008000", "#800080", "#FFFFFF"]	;
 //Black, Red, Green, Purple, White
 
 let sendQueue = [];
-let lastIdx = 0; // index of last received contour
+let nextIdx = 0; // index of the next contour I will receive
 let ct = 0;
 
 // these are some parameters
@@ -17,7 +17,20 @@ let sWeight = 2.5;
 let roomNumber = parseInt(window.location.href.substr(window.location.href.search("value=")+6));
 
 function killBoard() {
-  $.post("/killBoard", JSON.stringify(roomNumber));
+	$.ajax({
+    type: "POST",
+    contentType: "application/json",
+    url: "/killBoard",
+    data: JSON.stringify({"roomNumber": roomNumber, "nextIdx":nextIdx}),
+		success: function(){
+			background(255,255,255);
+		},
+    dataType: "json"
+  });
+}
+function saveBoard(){
+	let name = prompt("Input the filename that you want you png to be saved as");
+	save(name);
 }
 
 function setup() {
@@ -40,18 +53,24 @@ function draw() {
       type: "POST",
       contentType: "application/json",
       url: "/getData",
-      data: JSON.stringify({"lastIdx": lastIdx, "roomNumber": roomNumber}),
+      data: JSON.stringify({"nextIdx": nextIdx, "roomNumber": roomNumber}),
       success: function(data) {
         // console.log(data);
-        for(let k = 0; k < data.length; k++){
-          for(let j = 0; j < data[k].length-1; j++){
-            stroke(colors[data[k][j][2]]);
-            strokeWeight(data[k][j][3]);
-            line(data[k][j][0],data[k][j][1],data[k][j+1][0],data[k][j+1][1]);
-          }
-          lastIdx += 1;
-          console.log("success");
-        }
+				if(!data){ // kill signal
+					background(255,255,255);
+					console.log("got killed!!!");
+				}
+				else {
+					for(let k = 0; k < data.length; k++){
+						for(let j = 0; j < data[k].length-1; j++){
+							stroke(colors[data[k][j][2]]);
+							strokeWeight(data[k][j][3]);
+							line(data[k][j][0],data[k][j][1],data[k][j+1][0],data[k][j+1][1]);
+						}
+						nextIdx += 1;
+						console.log("success");
+					}
+				}
       },
       dataType: "json"
     });
