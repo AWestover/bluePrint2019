@@ -12,7 +12,7 @@
   "author": "Alek Westove",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "p5": "^0.7.3"
   }
 }
